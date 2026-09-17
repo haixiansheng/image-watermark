@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Watermark Photos: Placement, Size and Opacity Guide · Image Watermark</title>
+<meta name="description" content="How to place, size and set opacity on a photo watermark: nine positions compared, sizing as a percentage of width, and the outline that keeps text visible on light backgrounds. Includes copy-paste settings for six scenarios.">
+<link rel="canonical" href="https://haixiansheng.github.io/image-watermark/en/blog/watermark-placement-guide.html" />
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>How to Watermark Photos: Placement, Size and Opacity Guide</h1>
+    <p class="sub">How to place, size and set opacity on a photo watermark: nine position</p>
+  </header>
+  <section class="panel content article">
+
+    <p class="article-meta">2026-09-17 · ~1100 words · 5 min read</p>
+
+    <p>Watermarking looks trivial — type some words, drop them on the image. But anyone who's
+       done it knows the three real parameters (position, size, opacity) are easy to get
+       wrong in both directions: a mark that's invisible does nothing, and one that's too
+       loud ruins the photo. Here are settings you can copy directly.</p>
+
+    <h2>1. Position: nine cells, each with a trade-off</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>Position</th><th>Crop-away cost</th><th>Hides subject</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Bottom right</b></td><td>High</td><td>No</td><td class="us">✅ Best default</td></tr>
+        <tr><td><b>Bottom left</b></td><td>High</td><td>No</td><td class="us">✅ Good, suits left-weighted compositions</td></tr>
+        <tr><td>Top right</td><td>High</td><td>No</td><td>Fine, but visually less settled than bottom right</td></tr>
+        <tr><td>Top left</td><td>High</td><td>No</td><td>Fine for unusual compositions</td></tr>
+        <tr><td>Dead centre</td><td>Low</td><td><b>Severe</b></td><td>⚠️ Only at very low opacity</td></tr>
+        <tr><td>Edge midpoints</td><td>Low</td><td>No</td><td>Weakest visually — avoid</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Why bottom right wins</h3>
+    <ol>
+      <li><b>It's where the eye lands.</b> People scan an image and settle at the bottom
+          right, so a mark there does its "notice me" job most reliably.</li>
+      <li><b>It's usually low-value real estate</b> — sky, ground, blurred background.
+          A mark there doesn't cover the subject.</li>
+      <li><b>Cropping it out costs composition.</b> The bottom right is normally where the
+          frame resolves, so removing it unbalances the shot.</li>
+    </ol>
+
+    <h3>Why centre is a trap</h3>
+    <p>The centre is the visual focus — a watermark there is a stamp on the subject's face.
+       If you must, drop opacity below 20%, but at that point it barely registers as a mark
+       at all. Both directions lose.</p>
+
+    <h2>2. Size: as a percentage of image width</h2>
+    <p><b>Never use a fixed pixel size.</b> A 48px mark is right on an 800px image and
+       invisible on a 6000px one. Size it as a <b>percentage of the image width</b>.</p>
+    <table class="compare-table">
+      <thead><tr><th>% of width</th><th>Effect</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr><td>&lt; 2%</td><td>Unreadable</td><td>❌ pointless</td></tr>
+        <tr><td>2–4%</td><td>Restrained, subtle</td><td>Portfolios, fine-art prints</td></tr>
+        <tr><td><b>4–8%</b></td><td><b>Legible without shouting</b></td><td class="us">✅ recommended</td></tr>
+        <tr><td>8–15%</td><td>Assertive</td><td>Anti-theft, strong attribution</td></tr>
+        <tr><td>&gt; 15%</td><td>Dominates</td><td>❌ ruins the image</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Opacity: 50–70% is the sweet spot</h2>
+    <table class="compare-table">
+      <thead><tr><th>Opacity</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr><td>10–30%</td><td>Barely visible — fails to mark anything</td></tr>
+        <tr><td><b>50–70%</b></td><td class="us">✅ Clearly readable, not distracting</td></tr>
+        <tr><td>80–100%</td><td>Harsh, sticker-like, visibly damages the photo</td></tr>
+      </tbody>
+    </table>
+    <p>On busy backgrounds (foliage, crowds) push toward 70–75% for legibility; on large
+       flat areas, 50% is plenty.</p>
+
+    <h2>4. The most overlooked setting: the outline</h2>
+    <p>This is the detail that matters most in practice and gets skipped most often.</p>
+    <p>White watermark text on a light background simply <b>disappears</b> — white sky,
+       white walls, snow, pale desktops are all worst cases. Black text on dark backgrounds
+       fails the same way in reverse.</p>
+    <p><b>The fix is an outline</b>: draw a semi-transparent dark (or light) edge around the
+       glyphs so the mark is identifiable regardless of what's behind it.</p>
+    <p>In Canvas it's one extra step: <code>strokeText</code> (the outline) before
+       <code>fillText</code> (the fill).</p>
+    <p>Our <a href="../index.html">watermark tool</a> ships with the outline enabled by
+       default, precisely because turning it off goes wrong on light images.</p>
+
+    <h2>5. Copy-paste settings by scenario</h2>
+    <table class="compare-table">
+      <thead><tr><th>Scenario</th><th>Position</th><th>Size</th><th>Opacity</th><th>Outline</th></tr></thead>
+      <tbody>
+        <tr><td>Photographer's portfolio</td><td>Bottom right</td><td>3–4%</td><td>45%</td><td>On</td></tr>
+        <tr><td>Social sharing</td><td>Bottom right</td><td>5%</td><td>60%</td><td>On</td></tr>
+        <tr><td>Shop product photos (anti-theft)</td><td>Bottom right + tile</td><td>5%</td><td>55%</td><td>On</td></tr>
+        <tr><td>Client preview (unpaid)</td><td><b>Tile whole image</b></td><td>6%</td><td>65%</td><td>On</td></tr>
+        <tr><td>Design hand-off archive</td><td>Bottom right</td><td>4%</td><td>50%</td><td>On</td></tr>
+        <tr><td>Reposts requiring firm attribution</td><td>Tile + rotated</td><td>8%</td><td>70%</td><td>On</td></tr>
+      </tbody>
+    </table>
+
+    <h2>6. Three common mistakes</h2>
+
+    <h3>Mistake 1 — pure white at 100% opacity</h3>
+    <p>The classic beginner watermark: fully opaque white, oversized. The mark ends up louder
+       than the photo. <b>Lowering opacity helps more than shrinking the font.</b></p>
+
+    <h3>Mistake 2 — putting it on the subject</h3>
+    <p>Faces, product subjects, the focal point — a mark there destroys the image's usability.
+       The point of a watermark is to state provenance, not to wreck the work.</p>
+
+    <h3>Mistake 3 — only fixing visibility after you notice it's missing</h3>
+    <p>Turn the <b>outline on first</b>, then tune everything else. That way no image
+       surprises you later.</p>
+
+    <h2>Try it</h2>
+    <p>Our <a href="../index.html">watermark tool</a> exposes all of this as sliders:
+       size as a percentage of width, opacity, rotation, a nine-cell position grid, a tiling
+       switch and an outline switch. Everything runs locally in your browser — nothing is
+       uploaded, and we never add a second watermark of our own.</p>
+
+  </section>
+  <div class="ad-slot ad-bottom"></div>
+  <footer>
+    <nav class="foot-nav">
+      <a href="../index.html">Back to the tool</a> ·
+      <a href="index.html">All articles</a> ·
+      <a href="../about.html">About</a> ·
+      <a href="../privacy.html">Privacy Policy</a>
+    </nav>
+    <p class="copy">© 2026 Image Watermark</p>
+  </footer>
+</div>
+</body>
+</html>

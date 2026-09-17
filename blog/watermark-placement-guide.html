@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>照片水印怎么加才专业：位置/大小/透明度完整指南 · 加水印</title>
+<meta name="description" content="照片水印的位置、大小、透明度怎么调？九宫格位置对比、按图宽百分比算字号、描边解决浅色背景看不见的问题，附 6 种场景的可照抄参数表。">
+<link rel="canonical" href="https://haixiansheng.github.io/image-watermark/blog/watermark-placement-guide.html" />
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>照片水印怎么加才专业：位置/大小/透明度完整指南</h1>
+    <p class="sub">照片水印的位置、大小、透明度怎么调？九宫格位置对比、按图宽百分比算字号、描边解决浅色背景看不见的问题，附 6 种场景的可照抄参数表。</p>
+  </header>
+  <section class="panel content article">
+
+    <p class="article-meta">2026-09-17 · 约 1500 字 · 阅读 5 分钟</p>
+
+    <p>加水印是件看起来很简单的事——打个字放上去就完了。但真正做过的人都知道，
+       位置、大小、透明度这三个参数没调好，要么水印"看不见"起不到作用，
+       要么"太抢眼"毁了整张照片。这篇文章给出可以直接照抄的参数区间。</p>
+
+    <h2>一、位置：九个格子，各有取舍</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>位置</th><th>容易被裁掉</th><th>遮挡主体</th><th>适用场景</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>右下角</b></td><td>较难</td><td>否</td><td class="us">✅ 最推荐，通用最佳</td></tr>
+        <tr><td><b>左下角</b></td><td>较难</td><td>否</td><td class="us">✅ 推荐，适合留白在左的构图</td></tr>
+        <tr><td>右上角</td><td>较难</td><td>否</td><td>可以，但视觉上不如右下稳</td></tr>
+        <tr><td>左上角</td><td>较难</td><td>否</td><td>可以，适合特殊构图</td></tr>
+        <tr><td>正中</td><td>难</td><td><b>严重</b></td><td>⚠️ 只建议极低透明度</td></tr>
+        <tr><td>四边中点</td><td>容易</td><td>否</td><td>审美上最弱，不建议</td></tr>
+      </tbody>
+    </table>
+
+    <h3>为什么推荐右下角</h3>
+    <p>三个原因：</p>
+    <ol>
+      <li><b>符合阅读习惯落点</b>——视线扫过图片后自然停在右下，
+          水印的"告知"作用最容易生效。</li>
+      <li><b>多数照片右下是弱信息区</b>——天空、地面、虚化背景，
+          放水印不遮挡主体。</li>
+      <li><b>裁剪掉它要付出构图代价</b>——右下通常是画面的收尾处，裁掉会让构图失衡。</li>
+    </ol>
+
+    <h3>为什么不要放正中</h3>
+    <p>正中是视觉焦点，放水印等于在主体脸上盖章。如果一定要放，
+       透明度必须降到 20% 以下——但那样又几乎起不到标识作用，属于两头不讨好。</p>
+
+    <h2>二、大小：按图片宽度的百分比算</h2>
+    <p><b>不要用固定像素值。</b>同一个 48px 的水印，放在 800px 宽的图上正好，
+       放在 6000px 宽的图上小得看不见。正确做法是按<b>图片宽度的百分比</b>计算。</p>
+    <table class="compare-table">
+      <thead><tr><th>占图宽比例</th><th>效果</th><th>建议</th></tr></thead>
+      <tbody>
+        <tr><td>&lt; 2%</td><td>看不清</td><td>❌ 白加了</td></tr>
+        <tr><td>2-4%</td><td>克制、低调</td><td>作品集、精修图</td></tr>
+        <tr><td><b>4-8%</b></td><td><b>清晰且不抢戏</b></td><td class="us">✅ 推荐区间</td></tr>
+        <tr><td>8-15%</td><td>强势、明显</td><td>防盗图、需强署名</td></tr>
+        <tr><td>&gt; 15%</td><td>严重遮挡</td><td>❌ 基本毁图</td></tr>
+      </tbody>
+    </table>
+
+    <h2>三、透明度：50-70% 是甜区</h2>
+    <table class="compare-table">
+      <thead><tr><th>透明度</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td>10-30%</td><td>若隐若现，几乎不起标识作用</td></tr>
+        <tr><td><b>50-70%</b></td><td class="us">✅ 清晰可读，又不会喧宾夺主</td></tr>
+        <tr><td>80-100%</td><td>生硬，像贴纸，明显影响观感</td></tr>
+      </tbody>
+    </table>
+    <p>如果背景很复杂（比如树叶、人群），透明度可以提到 70-75% 保证可读性；
+       如果背景是大面积纯色，50% 就够。</p>
+
+    <h2>四、一个常被忽略的关键：描边</h2>
+    <p>这是实践中<b>最重要但最常被忽略</b>的一点。</p>
+    <p>白色水印文字放在浅色背景上会直接"消失"——白色天空、白墙、雪地、
+       浅色桌面，都是白字的重灾区。反过来黑字在暗背景上同理。</p>
+    <p><b>解决办法是加描边</b>：在文字周围绘制一层半透明的深色（或浅色）边缘。
+       这样无论背景是亮是暗，水印都能被辨认出来。</p>
+    <p>用 Canvas 实现只需要在填充文字之前先绘制一次带描边的版本：
+       先 <code>strokeText</code>（描边），再 <code>fillText</code>（填充）。</p>
+    <p>我们的<a href="../index.html">加水印工具</a>默认开启描边，就是因为
+       关掉它在浅色图上很容易翻车。</p>
+
+    <h2>五、按场景直接照抄</h2>
+    <table class="compare-table">
+      <thead><tr><th>场景</th><th>位置</th><th>大小</th><th>透明度</th><th>描边</th></tr></thead>
+      <tbody>
+        <tr><td>摄影师作品集展示</td><td>右下</td><td>3-4%</td><td>45%</td><td>开</td></tr>
+        <tr><td>朋友圈 / 社交分享</td><td>右下</td><td>5%</td><td>60%</td><td>开</td></tr>
+        <tr><td>网店商品图防盗</td><td>右下 + 平铺</td><td>5%</td><td>55%</td><td>开</td></tr>
+        <tr><td>客户预览图（未付款）</td><td><b>平铺全图</b></td><td>6%</td><td>65%</td><td>开</td></tr>
+        <tr><td>设计稿交付留档</td><td>右下</td><td>4%</td><td>50%</td><td>开</td></tr>
+        <tr><td>需要强行署名的转载图</td><td>平铺 + 斜置</td><td>8%</td><td>70%</td><td>开</td></tr>
+      </tbody>
+    </table>
+
+    <h2>六、三个常见错误</h2>
+
+    <h3>错误 1：用纯白色的 100% 不透明</h3>
+    <p>这是新手最典型的水印——纯白、全不透明、字号还很大。结果是水印比照片本身还抢眼。
+       <b>降低透明度比缩小字号更有效</b>。</p>
+
+    <h3>错误 2：水印压在主体上</h3>
+    <p>人物脸、产品主体、画面焦点——这些位置放水印会让图片失去使用价值。
+       加水印的目的是"声明来源"，不是"破坏作品"。</p>
+
+    <h3>错误 3：只在浅色图上发现水印看不见才想起来调</h3>
+    <p>正确做法是<b>先把描边开着</b>，再调其他参数。这样无论换什么图都不会翻车。</p>
+
+    <h2>动手试一下</h2>
+    <p>我们的<a href="../index.html">图片加水印工具</a>把这些参数都做成了滑块：
+       字号按图宽百分比、透明度、旋转、位置九宫格、平铺开关，还有描边开关。
+       全部纯浏览器本地处理，图片不上传，也不给你加二次水印。</p>
+
+  </section>
+  <div class="ad-slot ad-bottom"></div>
+  <footer>
+    <nav class="foot-nav">
+      <a href="../index.html">返回工具</a> ·
+      <a href="index.html">全部文章</a> ·
+      <a href="../about.html">关于我们</a> ·
+      <a href="../privacy.html">隐私政策</a>
+    </nav>
+    <p class="copy">© 2026 Image Watermark</p>
+  </footer>
+</div>
+</body>
+</html>

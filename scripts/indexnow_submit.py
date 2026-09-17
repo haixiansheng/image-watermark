@@ -6,8 +6,12 @@ KEY_FILE = os.path.join(BASE, ".indexnow-key")
 HOST = "haixiansheng.github.io"
 SITE = f"https://{HOST}/image-watermark"
 
-URLS = [f"{SITE}{p}" for p in ["/", "/about.html", "/privacy.html",
-                               "/en/", "/en/about.html", "/en/privacy.html"]]
+URLS = [f"{SITE}{p}" for p in [
+    "/", "/blog/", "/blog/watermark-placement-guide.html", "/blog/crop-proof-watermark.html",
+    "/about.html", "/privacy.html",
+    "/en/", "/en/blog/", "/en/blog/watermark-placement-guide.html",
+    "/en/blog/crop-proof-watermark.html", "/en/about.html", "/en/privacy.html",
+]]
 ENDPOINTS = ["https://api.indexnow.org/indexnow", "https://www.bing.com/indexnow",
              "https://yandex.com/indexnow"]
 
