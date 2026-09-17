@@ -1,0 +1,3 @@
+# Google AdSense ads.txt
+# 审核通过后填入发布商 ID：
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

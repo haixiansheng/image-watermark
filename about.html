@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于我们 · 图片加水印</title>
+<meta name="description" content="关于免费在线图片加水印工具：技术原理、水印参数建议与开源信息。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>关于我们</h1>
+    <p class="sub">一个免费、开源、隐私优先的在线工具</p>
+  </header>
+
+  <section class="panel content">
+    <h2>为什么做这个工具</h2>
+    <p>给图片加水印是刚需：摄影师要署名、品牌方要打标、网店卖家要防盗图、
+       普通人要标注版权。但常见的在线水印工具几乎都要
+       <b>先把图片上传到它们的服务器</b>——而很多待处理的图恰好是未发布的原创作品，
+       上传本身就意味着"先泄露给第三方"。</p>
+    <p>更糟的是，不少免费水印工具会在你的图上<b>再加一层它自己的水印</b>，
+       等于是你付出一张图，换回来两张水印。</p>
+    <p>所以我们做了这个工具：<b>水印绘制完全在浏览器里完成</b>。
+       图片不离开你的设备，不注册、不收费、不给你加二次水印。</p>
+
+    <h2>技术原理</h2>
+    <ol>
+      <li><b>解码</b>：浏览器原生解码你上传的图片。</li>
+      <li><b>绘制</b>：把原图画到 Canvas 上，然后用 Canvas 的文字/图像绘制接口
+          把水印叠加到指定位置（或平铺全图）。透明度用 <code>globalAlpha</code> 控制，
+          旋转用坐标变换实现。</li>
+      <li><b>导出</b>：通过 toBlob() 导出为高质量 JPEG。</li>
+    </ol>
+    <p>整个流程不涉及任何服务器端计算，断网也能正常使用。</p>
+
+    <h2>为什么建议加描边</h2>
+    <p>白色水印文字放在浅色天空、白色墙面这类背景上会"消失"。
+       描边会在文字周围绘制一层半透明深色边，让水印在<b>任何背景</b>上都清晰可读。
+       这是实践中很实用但常被忽略的细节。</p>
+
+    <h2>关于隐私</h2>
+    <p>重绘图片会丢弃原图的 EXIF 信息（拍摄时间、设备、<b>GPS 位置</b>等），
+       这同时帮你移除了照片里的位置隐私。</p>
+
+    <h2>开源</h2>
+    <p>本项目完全开源（MIT 协议）：<a href="https://github.com/haixiansheng/image-watermark" target="_blank" rel="noopener">haixiansheng/image-watermark</a>。</p>
+
+    <h2>重要提醒</h2>
+    <p>水印一旦保存到图片里就<b>无法去除</b>。请务必保留原图，
+       需要无水印版本时用原图重新导出。</p>
+
+    <h2>免责声明</h2>
+    <p>本工具按"现状"提供，不对效果做任何保证。请仅用于合法用途——
+       不要用本工具伪造、篡改他人作品的署名或版权信息。</p>
+  </section>
+
+  <footer>
+    <nav class="foot-nav">
+      <a href="index.html">返回工具</a> ·
+      <a href="privacy.html">隐私政策</a> ·
+      <a href="https://haixiansheng.github.io/image-compressor/">图片压缩</a> ·
+      <a href="https://haixiansheng.github.io/image-converter/">格式转换</a> ·
+      <a href="https://github.com/haixiansheng/image-watermark" target="_blank" rel="noopener">开源代码</a>
+    </nav>
+    <p class="copy">© 2026 Image Watermark</p>
+  </footer>
+
+</div>
+</body>
+</html>

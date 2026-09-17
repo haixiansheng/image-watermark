@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Watermark to Photo Online — Free Text &amp; Logo Watermark (No Upload)</title>
+<meta name="description" content="Free online watermark tool. Add text or logo watermarks to photos with adjustable size, colour, opacity, rotation, 9-position placement and full-image tiling. Runs entirely in your browser — images are never uploaded.">
+<meta name="keywords" content="add watermark to photo, watermark image online, text watermark, logo watermark, photo watermark tool, watermark pictures free, copyright watermark">
+<link rel="alternate" hreflang="zh-CN" href="https://haixiansheng.github.io/image-watermark/" />
+<link rel="alternate" hreflang="en" href="https://haixiansheng.github.io/image-watermark/en/" />
+<link rel="alternate" hreflang="x-default" href="https://haixiansheng.github.io/image-watermark/en/" />
+<link rel="canonical" href="https://haixiansheng.github.io/image-watermark/en/" />
+<link rel="stylesheet" href="../style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Image Watermark Tool",
+  "url": "https://haixiansheng.github.io/image-watermark/en/",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "description": "Free online watermark tool for text and logo watermarks with adjustable size, colour, opacity, rotation, position and tiling. Runs entirely in your browser.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "featureList": [
+    "Text watermark: content, size, colour, opacity, rotation, outline",
+    "Logo watermark: upload your logo, adjust scale and opacity",
+    "9-position grid plus full-image tiling",
+    "Live preview on every change",
+    "100% browser-based, no upload"
+  ],
+  "isAccessibleForFree": true
+}
+</script>
+
+<!-- ============ Google AdSense ============ -->
+<!-- After approval, replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID and uncomment -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>💧 Image Watermark Tool</h1>
+    <p class="sub">Text / Logo · 9 positions + tiling · live preview · never uploaded</p>
+    <p class="lang-switch"><a href="../">中文版</a></p>
+    <div class="trust-badges">
+      <span>🔒 No upload</span>
+      <span>🚫 No server</span>
+      <span>👁️ Live preview</span>
+      <span>🆓 100% free</span>
+      <span>💧 No extra watermark</span>
+    </div>
+  </header>
+
+  <!-- ============ Ad slot 1 ============ -->
+  <div class="ad-slot ad-top"></div>
+
+  <section id="uploadPanel" class="panel">
+    <div id="dropZone" class="drop-zone">
+      <div class="drop-icon">🖼️</div>
+      <p>Click to choose an image, or drag &amp; drop one here</p>
+      <p class="hint">JPG / PNG / WebP / BMP · Ctrl+V to paste</p>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+    </div>
+  </section>
+
+  <section id="workPanel" class="panel hidden">
+    <div class="canvas-wrap">
+      <canvas id="canvas"></canvas>
+    </div>
+    <p class="cmp-dims">
+      Original <b id="origDims">—</b> · <span id="origSize">—</span>
+      &nbsp;→&nbsp;
+      Output <b id="resultDims">—</b> · <span id="resultSize">—</span>
+    </p>
+
+    <div class="wm-tabs">
+      <button id="modeText" class="wm-tab active">✏️ Text watermark</button>
+      <button id="modeImage" class="wm-tab">🖼️ Logo watermark</button>
+    </div>
+
+    <div id="textPanel" class="toolbar">
+      <label class="ctrl wide">
+        <span>Watermark text</span>
+        <input type="text" id="wmText" placeholder="Watermark text, e.g. © Your Name" maxlength="80">
+      </label>
+
+      <label class="ctrl">
+        <span>Size (% of width) <b id="fontSizeVal">5</b></span>
+        <input type="range" id="fontSize" min="1" max="25" value="5">
+      </label>
+
+      <label class="ctrl small">
+        <span>Colour</span>
+        <input type="color" id="color" value="#ffffff">
+      </label>
+
+      <label class="ctrl">
+        <span>Opacity <b id="opacityVal">60</b>%</span>
+        <input type="range" id="opacity" min="5" max="100" value="60">
+      </label>
+
+      <label class="ctrl">
+        <span>Rotation <b id="rotationVal">0</b>°</span>
+        <input type="range" id="rotation" min="-90" max="90" value="0">
+      </label>
+
+      <label class="chk">
+        <input type="checkbox" id="bold" checked>
+        <span>Bold</span>
+      </label>
+
+      <label class="chk">
+        <input type="checkbox" id="outline" checked>
+        <span>Outline (keeps it readable on light backgrounds)</span>
+      </label>
+    </div>
+
+    <div id="imagePanel" class="toolbar hidden">
+      <div class="logo-box">
+        <button id="logoPick" class="btn">📁 Choose logo image</button>
+        <input type="file" id="logoInput" accept="image/*" hidden>
+        <img id="logoThumb" class="logo-thumb hidden" alt="logo">
+        <span id="logoName" class="logo-name"></span>
+      </div>
+
+      <label class="ctrl">
+        <span>Logo width (% of image) <b id="logoScaleVal">15</b></span>
+        <input type="range" id="logoScale" min="3" max="60" value="15">
+      </label>
+    </div>
+
+    <div class="pos-row" id="posRow">
+      <span class="pos-label">Position</span>
+      <div id="posGrid" class="pos-grid">
+        <button data-pos="top-left" title="Top left"></button>
+        <button data-pos="top-center" title="Top centre"></button>
+        <button data-pos="top-right" title="Top right"></button>
+        <button data-pos="middle-left" title="Middle left"></button>
+        <button data-pos="center" title="Centre"></button>
+        <button data-pos="middle-right" title="Middle right"></button>
+        <button data-pos="bottom-left" title="Bottom left"></button>
+        <button data-pos="bottom-center" title="Bottom centre"></button>
+        <button data-pos="bottom-right" title="Bottom right" class="active"></button>
+      </div>
+      <button data-pos="tile" id="tileBtn" class="tile-btn">▦ Tile whole image</button>
+    </div>
+
+    <p id="status" class="status"></p>
+
+    <div class="actions">
+      <a id="downloadBtn" class="btn primary" download="watermarked.jpg">⬇ Download image</a>
+      <button id="resetBtn" class="btn">Choose another image</button>
+    </div>
+  </section>
+
+  <!-- ============ Ad slot 2 ============ -->
+  <div class="ad-slot ad-mid"></div>
+
+  <!-- ============ Selling points ============ -->
+  <h2 class="section-title">Why choose this tool</h2>
+  <p class="section-sub">The only watermark tool that literally <em>cannot</em> store your images</p>
+
+  <div class="features">
+    <div class="feature hero">
+      <div class="f-icon">🔒</div>
+      <h3>No upload, no server</h3>
+      <p>There is <b>no backend server at all</b>. Watermarking runs in your browser, your images
+         never leave your device, and we are <b>technically unable</b> to store them.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">✏️</div>
+      <h3>Text watermark, fully adjustable</h3>
+      <p>Content, size, colour, opacity and rotation — plus an optional outline so the mark
+         stays legible on light backgrounds.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">🖼️</div>
+      <h3>Logo watermark support</h3>
+      <p>Upload your own logo and control its scale and opacity. Built for brands,
+         photographers and shop owners marking their work.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">▦</div>
+      <h3>9 positions + tiling</h3>
+      <p>One-click placement in any of nine positions, or tile the whole image —
+         tiling can't be cropped away, which makes it effective anti-theft marking.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">👁️</div>
+      <h3>Live preview</h3>
+      <p>Every change redraws instantly. No process-download-check loop.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon">💧</div>
+      <h3>No extra watermark from us</h3>
+      <p>Many free watermark tools stamp their <em>own</em> watermark on your output.
+         We don't — the result contains only the mark you added.</p>
+    </div>
+  </div>
+
+  <section class="panel content">
+    <h2 class="section-title" style="margin-top:0">How it compares</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>&nbsp;</th><th>Typical online tools</th><th>This tool</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Uploads your images?</td><td>❌ Yes</td><td class="us">✅ Never</td></tr>
+        <tr><td>Server could store your images?</td><td>⚠️ Technically yes</td><td class="us">✅ No server at all</td></tr>
+        <tr><td>Adds its own watermark?</td><td>Common (free tier)</td><td class="us">✅ Never</td></tr>
+        <tr><td>Logo watermark</td><td>Often paid</td><td class="us">✅ Free</td></tr>
+        <tr><td>Tiled anti-theft mode</td><td>Rarely supported</td><td class="us">✅ Supported</td></tr>
+        <tr><td>Account required?</td><td>Often</td><td class="us">✅ None</td></tr>
+        <tr><td>Data breach risk</td><td>Depends on their servers</td><td class="us">✅ Zero (no data sent)</td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px">
+      💡 Verify it yourself: press F12 → Network tab → watermark an image.
+      You'll see <b>no image data is ever sent</b>.
+    </p>
+  </section>
+
+  <!-- ============ Content ============ -->
+  <section class="panel content">
+    <h2>📖 How to use</h2>
+
+    <h3>Steps</h3>
+    <ol>
+      <li><b>Upload an image</b> — click, drag &amp; drop, or paste with Ctrl+V.</li>
+      <li><b>Pick a type</b> — "✏️ Text watermark" to type directly, or "🖼️ Logo watermark"
+          to upload your logo.</li>
+      <li><b>Tune it</b> — size, colour, opacity, rotation (text also supports bold and outline).</li>
+      <li><b>Choose a position</b> — click one of the nine grid cells, or hit
+          "▦ Tile whole image".</li>
+      <li><b>Download</b> — click "Download image" (high-quality JPEG, no extra watermark).</li>
+    </ol>
+
+    <h3>Recommended settings</h3>
+    <table class="compare-table">
+      <thead><tr><th>Setting</th><th>Suggested</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Size</td><td>4–8% of image width</td><td>Too small is unreadable; too large hides the subject</td></tr>
+        <tr><td>Opacity</td><td>50–70%</td><td>Below that it fails to mark; above it ruins the photo</td></tr>
+        <tr><td>Rotation</td><td>0° or −30° to −45°</td><td>Angled looks natural when tiled, and is harder to crop out</td></tr>
+        <tr><td>Outline</td><td>On</td><td>White text vanishes on bright or busy backgrounds</td></tr>
+        <tr><td>Position</td><td>Bottom-right or bottom-left</td><td>Centre covers the subject; flat areas read better</td></tr>
+        <tr><td>Tiling</td><td>For anti-theft only</td><td>Cannot be removed by cropping</td></tr>
+      </tbody>
+    </table>
+
+    <h3>FAQ</h3>
+    <p><b>Q: Are my images uploaded to a server?</b><br>
+       A: No. Everything runs in your browser. Images never leave your device, and it works offline.</p>
+    <p><b>Q: Can the watermark be removed afterwards?</b><br>
+       A: <b>No</b> — it's drawn into the pixels, so saving is irreversible. Always
+       <b>keep your original</b> and re-export from it when you need a clean version.</p>
+    <p><b>Q: Why should I enable the outline?</b><br>
+       A: White text disappears against bright skies or white walls. The outline adds a
+          semi-transparent dark edge so the mark stays readable on any background.</p>
+    <p><b>Q: Doesn't tiling look ugly?</b><br>
+       A: A little. Tiling is for <b>anti-theft</b> (it can't be cropped away). For normal
+          portfolio display, a single bottom-right mark at ~50% opacity looks much better.</p>
+    <p><b>Q: Does it reduce quality?</b><br>
+       A: Output is high-quality JPEG (95%), visually indistinguishable. Resolution stays
+          identical to the original.</p>
+    <p><b>Q: Is EXIF data preserved?</b><br>
+       A: No. Redrawing drops EXIF metadata, which conveniently also
+       <b>removes location privacy data</b> from your photos.</p>
+    <p><b>Q: Can I watermark multiple images at once?</b><br>
+       A: Currently one image at a time. Batch support is in development.</p>
+
+    <h3>Supported browsers</h3>
+    <p>Recent Chrome, Edge, Firefox and Safari.</p>
+  </section>
+
+  <!-- ============ Ad slot 3 ============ -->
+  <div class="ad-slot ad-bottom"></div>
+
+  <footer>
+    <p>Runs entirely in your browser · Your image never leaves your device</p>
+    <nav class="foot-nav">
+      <a href="about.html">About</a> ·
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="https://haixiansheng.github.io/image-compressor/en/">Image Compressor</a> ·
+      <a href="https://haixiansheng.github.io/image-converter/en/">Image Converter</a> ·
+      <a href="https://haixiansheng.github.io/face-mosaic/en/">Face Mosaic Tool</a> ·
+      <a href="https://github.com/haixiansheng/image-watermark" target="_blank" rel="noopener">Source code</a>
+    </nav>
+    <p class="copy">© 2026 Image Watermark · For lawful use only.</p>
+  </footer>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About · Image Watermark Tool</title>
+<meta name="description" content="About the free online watermark tool: how it works, recommended settings, and open source info.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>About</h1>
+    <p class="sub">A free, open-source, privacy-first online tool</p>
+  </header>
+
+  <section class="panel content">
+    <h2>Why we built this</h2>
+    <p>Watermarking images is a regular need: photographers signing their work, brands
+       marking assets, shops deterring image theft, people asserting copyright. But the usual
+       online tools require you to <b>upload your image to their server</b> — and what people
+       watermark is often unreleased original work. Uploading it means handing it to a third
+       party first.</p>
+    <p>Worse, many free watermark tools then stamp <b>their own watermark on top</b> of yours.
+       You hand over an image and get back two watermarks.</p>
+    <p>So we built this: <b>all watermarking happens inside your browser</b>. Your image never
+       leaves your device. No sign-up, no fees, and no second watermark from us.</p>
+
+    <h2>How it works</h2>
+    <ol>
+      <li><b>Decode</b> — the browser natively decodes your image.</li>
+      <li><b>Draw</b> — the image is drawn to a Canvas, and the watermark is composited on top
+          at the chosen position (or tiled across the image). Opacity uses
+          <code>globalAlpha</code>; rotation uses a coordinate transform.</li>
+      <li><b>Export</b> — written out as a high-quality JPEG via <code>toBlob()</code>.</li>
+    </ol>
+    <p>No server-side computation is involved, so it even works offline.</p>
+
+    <h2>Why the outline option matters</h2>
+    <p>White watermark text disappears against bright skies or white walls. The outline draws
+       a semi-transparent dark edge around the glyphs, keeping the mark readable on
+       <b>any background</b> — a small detail that makes a real difference.</p>
+
+    <h2>Privacy bonus</h2>
+    <p>Redrawing drops the original EXIF metadata (capture time, device,
+       <b>GPS location</b>), which protects your location privacy.</p>
+
+    <h2>Open source</h2>
+    <p>Fully open source (MIT): <a href="https://github.com/haixiansheng/image-watermark" target="_blank" rel="noopener">haixiansheng/image-watermark</a>.</p>
+
+    <h2>Important note</h2>
+    <p>Once a watermark is saved into the pixels it <b>cannot be removed</b>. Always keep your
+       original and re-export from it when you need a clean version.</p>
+
+    <h2>Disclaimer</h2>
+    <p>Provided "as is", with no guarantee of results. For lawful use only — do not use this
+       tool to forge or misattribute anyone's work or copyright.</p>
+  </section>
+
+  <footer>
+    <nav class="foot-nav">
+      <a href="index.html">Back to the tool</a> ·
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="https://haixiansheng.github.io/image-compressor/en/">Image Compressor</a> ·
+      <a href="https://haixiansheng.github.io/image-converter/en/">Image Converter</a> ·
+      <a href="https://github.com/haixiansheng/image-watermark" target="_blank" rel="noopener">Source code</a>
+    </nav>
+    <p class="copy">© 2026 Image Watermark</p>
+  </footer>
+
+</div>
+</body>
+</html>
